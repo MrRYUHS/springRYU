@@ -1,13 +1,21 @@
 package com.example.design;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.example.design.singleton.AClazz;
+import com.example.design.singleton.BClazz;
+import com.example.design.singleton.SocketClient;
 
-@SpringBootApplication
 public class DesignApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DesignApplication.class, args);
+    public static void main(String[] args){
+
+        AClazz aClazz = new AClazz();
+        BClazz bClazz = new BClazz();
+
+        SocketClient aClient = aClazz.getSocketClient();
+        SocketClient bClient = bClazz.getSocketClient();
+
+        System.out.println("???");
+        System.out.println(aClient.equals(bClient));
     }
 
 }
