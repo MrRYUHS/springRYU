@@ -1,6 +1,8 @@
 package com.example.response.controller;
 
 import com.example.response.dto.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +21,10 @@ public class ApiController {
     public User json(@RequestBody User user){
         return user; // 200 ok
     }
+
+    // ResponseEntity
     @PutMapping("/put")
-    public User put(@RequestBody User user){}
+    public ResponseEntity<User> put(@RequestBody User user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
 }
