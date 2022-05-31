@@ -16,7 +16,7 @@ public class ParameterAop {
     @Pointcut("execution(* com.example.aop.controller..*.*(..))")
     private void cut(){}
 
-    @Before("cut()")
+    //@Before("cut()")
     public void before(JoinPoint joinPoint){
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
@@ -28,7 +28,7 @@ public class ParameterAop {
             System.out.println("value : "+obj);
         }
     }
-    @AfterReturning(value = "cut()", returning = "returnObj")
+    //@AfterReturning(value = "cut()", returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint, Object returnObj){
         System.out.println("return obj");
         System.out.println(returnObj);
