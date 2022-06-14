@@ -25,7 +25,7 @@ public class GetApiController {
         return pathName;
     }
 
-    // http://localhost:9090/api/get/query-param?user=steve&email=steve@gamil.com&age=30
+    // http://localhost:9090/api/get/query-param?user=steve&email=steve@gamil.com&age=30 매개변수인자
     @GetMapping(path = "query-param")
     public String queryParam(@RequestParam Map<String, String> queryParam){
         StringBuilder sb = new StringBuilder();
