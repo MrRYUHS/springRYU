@@ -1,6 +1,7 @@
 package com.example.springaop.aop;
 
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -9,4 +10,12 @@ import org.springframework.stereotype.Component;
 public class ParameterAop {
     @Pointcut("execution(* com.example.springaop.controller..*.*(..))")
     private void cut(){}
+
+    @Before("cut()")
+    public void before(){
+
+    }
+    public void afterReturn(){
+
+    }
 }
