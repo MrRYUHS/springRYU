@@ -31,5 +31,4 @@ class ObjectMapperApplicationTests {
         var objectUser = objectMapper.readValue(text, User.class);
         System.out.println(objectUser);
     }
-
 }
