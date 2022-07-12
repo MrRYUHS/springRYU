@@ -1,6 +1,7 @@
 package com.example.exception.advice;
 
 import com.example.exception.controller.ApiController;
+import com.example.exception.dto.ErrorResponse;
 import org.springframework.core.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,13 @@ public class ApiControllerAdvice {
             Error errorMessage = new Error();
             errorMessage.
         });
+        ErrorResponse errorResponse new ErrorResponse();
+        errorResponse.setErrorList(errorList);
+        errorResponse.setMessage();
+        errorResponse.setRequestUrl();
+        errorResponse.setStatusCode();
+        errorResponse.setResultCode();
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
     @ExceptionHandler(value = ConstraintViolationException.class)
