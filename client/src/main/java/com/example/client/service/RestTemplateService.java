@@ -32,4 +32,7 @@ public class RestTemplateService {
 
         return result.getBody();
     }
+    public UserResponse post(){
+        // http://localhost:9090/api/server/user/
+    }
 }
