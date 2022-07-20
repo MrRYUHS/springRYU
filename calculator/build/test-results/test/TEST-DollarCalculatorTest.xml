@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DollarCalculatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-18T15:21:29" hostname="DESKTOP-7RN4JK6" time="0.459">
+<testsuite name="DollarCalculatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-07-20T11:33:41" hostname="DESKTOP-7RN4JK6" time="0.62">
   <properties/>
-  <testcase name="mockTest()" classname="DollarCalculatorTest" time="0.459"/>
+  <testcase name="mockTest()" classname="DollarCalculatorTest" time="0.62"/>
   <system-out><![CDATA[60000
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
