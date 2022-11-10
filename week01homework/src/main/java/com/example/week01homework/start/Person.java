@@ -1,36 +1,52 @@
 package com.example.week01homework.start;
 
-public class Person {
-    private String name;
-    private int age;
-    private String job;
-    private String address;
+import com.example.week01homework.models.PersonRequestDto;
+import lombok.NoArgsConstructor;
 
-    public String getName(){
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+public class Person{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String job;
+    @Column(nullable = false)
+    private int age;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
-        this.name = name;
-    }
 
-    public String getJob(){
+    public String getJob() {
         return job;
     }
-    public void setJob(String job){
-        this.job = job;
-    }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
-    public void setAge(int age){
+
+    public Person(String name, String job, int age){
+        this.name = name;
+        this.job = job;
         this.age = age;
     }
-
-    public String getAddress(){
-        return address;
+    public void update(PersonRequestDto requestDto){
+        this.name = requestDto.getName();
+        this.job = requestDto.getJob();
+        this.age = requestDto.getAge();
     }
-    public void setAddress(String address){
-        this.address = address;
+    public Person(PersonRequestDto requestDto){
+        this.name = requestDto.getName();
+        this.job = requestDto.getJob();
+        this.age = requestDto.getAge();
     }
 }

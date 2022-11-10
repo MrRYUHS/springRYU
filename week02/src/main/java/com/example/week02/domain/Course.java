@@ -1,5 +1,6 @@
 package com.example.week02.domain;
 
+import com.example.week02.models.CourseRequestDto;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -35,8 +36,13 @@ public class Course extends Timestamped{
         this.tutor = tutor;
     }
 
-    public void update(Course course){
-        this.title = course.title;
-        this.tutor = course.tutor;
+    public void update(CourseRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.tutor = requestDto.getTutor();
+    }
+
+    public Course(CourseRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.tutor = requestDto.getTutor();
     }
 }
