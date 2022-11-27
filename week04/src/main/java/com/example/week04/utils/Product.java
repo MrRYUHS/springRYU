@@ -1,5 +1,6 @@
 package com.example.week04.utils;
 
+import com.example.week04.Dto.ItemDto;
 import com.example.week04.Dto.ProductMypriceRequestDto;
 import com.example.week04.Dto.ProductRequestDto;
 import lombok.Getter;
@@ -42,5 +43,8 @@ public class Product extends Timestamped{
     // 관심 가격 변경 시 이용
     public void update(ProductMypriceRequestDto requestDto){
         this.myprice = requestDto.getMyprice();
+    }
+
+    public void updateByItemDto(ItemDto itemDto) {
     }
 }
