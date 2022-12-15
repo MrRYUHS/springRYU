@@ -8,7 +8,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -23,13 +22,13 @@ public class ProductService {
         // 멤버 변수 생성
         this.productRepository = productRepository;
     }
-    public List<Product> getProducts(){
+    public List<Product> getProducts(Long userId){
         // 멤버 변수 사용
-        return productRepository.findAll();
+        return productRepository.findAllByUserId(userId);
     }
-    @Transactional // 메소드 동작이 SQL 쿼리문임을 선언
-    public Product createProduct(ProductRequestDto requestDto){
-        //요청 받은 DTO 로 DB에 저장할 객체 만들기
+    @Transactional // 메소드 동작이 SQL 쿼리문임을 선언합니다.
+    public Product createProduct(ProductRequestDto requestDto, Long userId ) {
+        // 요청받은 DTO 로 DB에 저장할 객체 만들기
         Product product = new Product(requestDto);
         productRepository.save(product);
         return product;
@@ -47,5 +46,9 @@ public class ProductService {
         }
         product.updateMyPrice(myPrice);
         return product;
+    }
+    // 모든 상품 (관리자용)
+    public List<Product> getAllProducts(){
+        return productRepository.findAll();
     }
 }

@@ -28,14 +28,18 @@ public class Product extends Timestamped{
     private int lprice;
     @Column(nullable = false)
     private int myprice;
+    @Column(nullable = false)
+    private Long userId;
 
     // 관심 상품 생성 시 이용
     public Product(ProductRequestDto requestDto){
+        // 관심상품을 등록한 회원 Id 저장
         this.title = requestDto.getTitle();
         this.image = requestDto.getImage();
         this.link = requestDto.getLink();
         this.lprice = requestDto.getLprice();
         this.myprice = 0;
+        this.userId = userId;
     }
 
     public void updateMyPrice(int myPrice) {
