@@ -35,6 +35,12 @@ public class UserController {
     public String forbidden() {
         return "forbidden";
     }
+    @GetMapping("/user/kakao/callback")
+    public String kakaoLogin(String code){
+        userService.kakaoLogin(code);
+
+        return "redirect:/";
+    }
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
     public String registerUser(SignupRequestDto requestDto){
