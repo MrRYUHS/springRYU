@@ -19,5 +19,4 @@ public class DBConnectionTest2Test extends TestCase {
         System.out.println("conn = " + conn);
         assertTrue(conn!=null); // 괄호 안의 조건식이 true면, 테스트 성공, 아니면 실패
     }
-
 }
