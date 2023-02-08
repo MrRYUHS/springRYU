@@ -85,6 +85,7 @@ public class ApplicationContextTest {
         Map<String, String> map = System.getenv();
         System.out.println("map = " + map);
 
-        
+        Properties properties = System.getProperties();
+        System.out.println("properties = " + properties);
     }
 }
