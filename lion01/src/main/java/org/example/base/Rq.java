@@ -1,23 +1,30 @@
-package org.example.domain;
+package org.example.base;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import org.example.standard.Ut;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rq {
     private String cmd;
+    @Getter
     private String action;
     private String queryString;
-    private List<String> paramNames;
-    private List<String> paramValues;
+    private Map<String, String> paramsMap;
 
-    Rq(String cmd) {
-        paramNames = new ArrayList<>();
-        paramValues = new ArrayList<>();
+    public Rq(String cmd) {
+        paramsMap = new HashMap<>();
 
         this.cmd = cmd;
 
         String[] cmdBits = cmd.split("\\?", 2);
         action = cmdBits[0].trim();
+
+        if (cmdBits.length == 1) {
+            return;
+        }
+
         queryString = cmdBits[1].trim();
 
         String[] queryStringBits = queryString.split("&");
@@ -29,26 +36,11 @@ public class Rq {
             String paramName = queryParamStrBits[0];
             String paramValue = queryParamStrBits[1];
 
-            paramNames.add(paramName);
-            paramValues.add(paramValue);
+            paramsMap.put(paramName, paramValue);
         }
-    }
-
-    public String getAction() {
-        return action;
     }
 
     public int getParamAsInt(String paramName, int defaultValue) {
-        int index = paramNames.indexOf(paramName);
-
-        if (index == -1) return defaultValue;
-
-        String paramValue = paramValues.get(index);
-
-        try {
-            return Integer.parseInt(paramValue);
-        } catch (NumberFormatException e) {
-            return defaultValue;
-        }
+        return Ut.str.parseInt(paramsMap.get(paramName), defaultValue);
     }
 }

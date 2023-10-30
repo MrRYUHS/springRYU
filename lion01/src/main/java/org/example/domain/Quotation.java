@@ -1,13 +1,17 @@
 package org.example.domain;
 
-public class Quotation {
-    public int id;
-    public String content;
-    public String authorName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-    public Quotation(int id, String content, String authorName) {
-        this.id = id;
-        this.content = content;
-        this.authorName = authorName;
-    }
+@AllArgsConstructor
+public class Quotation {
+    @Getter
+    private int id;
+    @Getter
+    @Setter
+    private String content;
+    @Getter
+    @Setter
+    private String authorName;
 }
