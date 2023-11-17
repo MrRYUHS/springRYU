@@ -1,4 +1,4 @@
-package com.example.lion231114;
+package com.example.lion231114.domain.home;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 @Controller
 public class HomeController {
@@ -232,7 +233,9 @@ public class HomeController {
         model.addAttribute("v2", "반가워");
         return "calc21";
     }
+
     int num = 0;
+
     @GetMapping("/calc22")
     @ResponseBody
     int showCalc22() {
