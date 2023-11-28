@@ -1,28 +1,32 @@
 package com.example.lion231114.domain.article.service;
 
+import com.example.lion231114.domain.member.entity.Member;
 import com.example.lion231114.domain.article.entity.Article;
 import com.example.lion231114.domain.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service // 저는 단 한번만 생성되고, 그 이후에는 재사용되는 객체입니다.
+@Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public Article write(String title, String body) {
-        Article article = new Article(title, body);
+    @Transactional
+    public Article write(Member author, String title, String body) {
+        Article article = Article.builder()
+                .author(author)
+                .title(title)
+                .body(body)
+                .build();
 
         articleRepository.save(article);
 
         return article;
-    }
-
-    public Article findLastArticle() {
-        return articleRepository.findLastArticle();
     }
 
     public List<Article> findAll() {
@@ -33,13 +37,32 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
-    public void delete(long id) {
-        articleRepository.delete(id);
+    @Transactional
+    public void delete(Article article) {
+        articleRepository.delete(article);
     }
 
-    public void modify(long id, String title, String body) {
-        Article article = findById(id).get();
+    @Transactional
+    public void modify(Article article, String title, String body) {
         article.setTitle(title);
         article.setBody(body);
+    }
+
+    public boolean canModify(Member actor, Article article) {
+        if (actor == null) return false;
+
+        return article.getAuthor().equals(actor);
+    }
+
+    public boolean canDelete(Member actor, Article article) {
+        if (actor == null) return false;
+
+        if (actor.isAdmin()) return true;
+
+        return article.getAuthor().equals(actor);
+    }
+
+    public Optional<Article> findLatest() {
+        return articleRepository.findFirstByOrderByIdDesc();
     }
 }

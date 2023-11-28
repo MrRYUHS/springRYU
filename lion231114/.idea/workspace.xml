@@ -17,17 +17,45 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/article/entity/Article.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/article/repository/ArticleRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/article/service/ArticleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/attr/entity/Attr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/attr/repository/AttrRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/attr/service/SystemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/home/AdmHomeController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/home/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/member/controller/MemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/member/entity/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/member/repository/MemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/domain/member/service/MemberService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/app/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/exceptionHandler/ControllerExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/initData/NotProd.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/rq/Rq.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/rsData/RsData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/security/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/global/webMvc/WebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lion231114/util/Ut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/global.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/global.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/article/detail.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/article/list.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/article/modify.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/article/write.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/article/write2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/global/admLayout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/global/baseLayout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/global/js.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/global/layout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/home/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/member/join.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/example/lion231114/Lion231114ApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/lion231114/domain/article/ArticleControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/lion231114/domain/base/AttrRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/lion231114/domain/home/AdmHomeControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/lion231114/domain/member/MemberControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +73,25 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -78,6 +120,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Documents/IntelliJ/lion231114/src/main/resources&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,6 +130,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\Documents\IntelliJ\lion231114\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Lion231114Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -108,7 +157,10 @@
       <workItem from="1700007865487" duration="8135000" />
       <workItem from="1700094381193" duration="1379000" />
       <workItem from="1700108844517" duration="5958000" />
-      <workItem from="1700180365401" duration="371000" />
+      <workItem from="1700180365401" duration="1593000" />
+      <workItem from="1700816798344" duration="18000" />
+      <workItem from="1701051880911" duration="7342000" />
+      <workItem from="1701145365856" duration="567000" />
     </task>
     <servers />
   </component>

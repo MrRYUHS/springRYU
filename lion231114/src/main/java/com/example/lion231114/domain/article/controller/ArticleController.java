@@ -4,73 +4,46 @@ import com.example.lion231114.domain.article.entity.Article;
 import com.example.lion231114.domain.article.service.ArticleService;
 import com.example.lion231114.global.rq.Rq;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/article")
 public class ArticleController {
     private final ArticleService articleService;
     private final Rq rq;
 
-    @GetMapping("/article/modify/{id}")
-    String showModify(Model model, @PathVariable long id) {
-        Article article = articleService.findById(id).get();
+    @GetMapping("/list")
+    String showList(Model model) {
+        List<Article> articles = articleService.findAll();
 
-        model.addAttribute("article", article);
+        model.addAttribute("articles", articles);
 
-        return "article/modify";
+        return "article/article/list";
     }
 
-    @Data
-    public static class ModifyForm {
-        @NotBlank
-        private String title;
-        @NotBlank
-        private String body;
-    }
-
-    @PostMapping("/article/modify/{id}")
-    String write(@PathVariable long id, @Valid ModifyForm modifyForm) {
-        articleService.modify(id, modifyForm.title, modifyForm.body);
-
-        String msg = "id %d, article modified".formatted(id);
-
-        return "redirect:/article/list?msg=" + msg;
-    }
-
-    @GetMapping("/article/delete/{id}")
-    String delete(@PathVariable long id) {
-        articleService.delete(id);
-
-        String msg = "%d번 게시물 생성되었습니다".formatted(id);
-
-        return "redirect:/article/list?msg=" + msg;
-    }
-
-    @GetMapping("/article/detail/{id}")
+    @GetMapping("/detail/{id}")
     String showDetail(Model model, @PathVariable long id) {
         Article article = articleService.findById(id).get();
 
         model.addAttribute("article", article);
 
-        return "article/detail";
+        return "article/article/detail";
     }
 
-    @GetMapping("/article/write")
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/write")
     String showWrite() {
-        return "article/write";
+        return "article/article/write";
     }
 
     @Data
@@ -81,66 +54,77 @@ public class ArticleController {
         private String body;
     }
 
-    @PostMapping("/article/write")
-    String write(@Valid WriteForm writeForm) {
-        Article article = articleService.write(writeForm.title, writeForm.body);
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/write")
+    String write(@Valid WriteForm writeForm, HttpServletRequest req) {
+        Article article = articleService.write(rq.getMember(), writeForm.title, writeForm.body);
 
-        String msg = "id %d, article created".formatted(article.getId());
-
-        return "redirect:/article/list?msg=" + msg;
+        return rq.redirect("/", "%d번 게시물 생성되었습니다.".formatted(article.getId()));
     }
 
-    @GetMapping("/article/list")
-    String showList(Model model) {
-        List<Article> articles = articleService.findAll();
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    String showModify(Model model, @PathVariable long id) {
+        Article article = articleService.findById(id).get();
 
-        model.addAttribute("articles", articles);
+        if (!articleService.canModify(rq.getMember(), article)) throw new RuntimeException("수정권한이 없습니다.");
 
-        return "article/list";
+        model.addAttribute("article", article);
+
+        return "article/article/modify";
     }
 
-    @GetMapping("/article/getLastArticle")
-    @ResponseBody
-    Article getLastArticle() {
-        return articleService.findLastArticle();
+    @Data
+    public static class ModifyForm {
+        @NotBlank
+        private String title;
+        @NotBlank
+        private String body;
     }
 
-    @GetMapping("/article/getArticles")
-    @ResponseBody
-    List<Article> getArticles() {
-        return articleService.findAll();
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("/modify/{id}")
+    String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
+        Article article = articleService.findById(id).get();
+
+        if (!articleService.canModify(rq.getMember(), article)) throw new RuntimeException("수정권한이 없습니다.");
+
+        articleService.modify(article, modifyForm.title, modifyForm.body);
+
+        return rq.redirect("/", "%d번 게시물 수정되었습니다.".formatted(id));
     }
 
-    @GetMapping("/article/articleServicePointer")
-    @ResponseBody
-    String articleServicePointer() {
-        return articleService.toString();
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/delete/{id}")
+    String delete(@PathVariable long id) {
+        Article article = articleService.findById(id).get();
+
+        if (!articleService.canDelete(rq.getMember(), article)) throw new RuntimeException("삭제권한이 없습니다.");
+
+        articleService.delete(article);
+
+        return rq.redirect("/", "%d번 게시물 삭제되었습니다.".formatted(id));
     }
 
-    @GetMapping("/article/httpServletRequestPointer")
-    @ResponseBody
-    String httpServletRequestPointer(HttpServletRequest req) {
-        return req.toString();
+    @Data
+    public static class ArticleCreateForm {
+        @NotBlank(message = "제목을 입력해주세요.")
+        private String title;
+        @NotBlank(message = "내용을 입력해주세요.")
+        private String body;
     }
 
-    @GetMapping("/article/httpServletResponsePointer")
-    @ResponseBody
-    String httpServletResponsePointer(HttpServletResponse resp) {
-        return resp.toString();
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/write2")
+    String showWrite2() {
+        return "article/article/write2";
     }
 
-    @GetMapping("/article/rqPointer")
-    @ResponseBody
-    String rqPointer() {
-        return rq.toString();
-    }
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/write2")
+    String write2(@Valid ArticleCreateForm articleCreateForm) {
+        Article article = articleService.write(rq.getMember(), articleCreateForm.getTitle(), articleCreateForm.getBody());
 
-    @GetMapping("/article/rqTest")
-    String showRqTest(Model model) {
-        String rqToString = rq.toString();
-
-        model.addAttribute("rqToString", rqToString);
-
-        return "article/rqTest";
+        return rq.redirect("/", "%d번 게시물 생성되었습니다.".formatted(article.getId()));
     }
 }
